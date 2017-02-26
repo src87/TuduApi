@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using TuduApi.Data;
 
 namespace TuduApi
 {
@@ -38,6 +39,9 @@ namespace TuduApi
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+
+            //todo: change from singleton when no longer using mock
+            services.AddSingleton<ITaskRepository, MockTaskRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
