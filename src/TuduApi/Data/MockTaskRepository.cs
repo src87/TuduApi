@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TuduApi.Models;
 
@@ -14,12 +13,12 @@ namespace TuduApi.Data
             _tasks = InitialTasks().ToList();
         }
 
-        private IEnumerable<Task> InitialTasks()
+        private static IEnumerable<Task> InitialTasks()
         {
-            yield return new Task { Id = 1, Title = "First test task", Description = "first description" };
-            yield return new Task { Id = 2, Title = "Second test task", Description = "second description" };
-            yield return new Task { Id = 3, Title = "Third test task", Description = "third description" };
-            yield return new Task { Id = 4, Title = "Fourth test task", Description = "fourth description" };
+            yield return new Task { Id = 1, Title = "First test task", Description = "first description", Status = TaskStatus.Active };
+            yield return new Task { Id = 2, Title = "Second test task", Description = "second description", Status = TaskStatus.Active };
+            yield return new Task { Id = 3, Title = "Third test task", Description = "third description", Status = TaskStatus.Done };
+            yield return new Task { Id = 4, Title = "Fourth test task", Description = "fourth description", Status = TaskStatus.Archived };
         }
 
         public IEnumerable<Task> GetTasks()

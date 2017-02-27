@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Converters;
 using TuduApi.Data;
 
 namespace TuduApi
@@ -38,7 +35,10 @@ namespace TuduApi
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddMvc();
+            services.AddMvc()
+                    .AddJsonOptions(
+                        options
+                            => options.SerializerSettings.Converters.Add(new StringEnumConverter(true)));
 
             //todo: change from singleton when no longer using mock
             services.AddSingleton<ITaskRepository, MockTaskRepository>();
