@@ -26,6 +26,16 @@ namespace TuduApi.Data
             return _tasks.OrderBy(t => t.Id);
         }
 
+        public IEnumerable<Task> GetTasks(IEnumerable<string> searchTerms)
+        {
+            var tasks = _tasks
+                .Where(t => searchTerms.Any(s => t.Title.ToLower().Contains(s.ToLower()) 
+                                              || t.Description.ToLower().Contains(s.ToLower())))
+                .OrderBy(t => t.Id);
+
+            return tasks;
+        }
+
         public void Add(Task task)
         {
             _tasks.Add(task);

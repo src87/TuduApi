@@ -16,9 +16,13 @@ namespace TuduApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Task> Get()
+        public IEnumerable<Task> Get(string searchTerms = null)
         {
-            return _taskRepository.GetTasks();
+            if (string.IsNullOrWhiteSpace(searchTerms))
+                return _taskRepository.GetTasks();
+
+            var terms = searchTerms.Split(' ');
+            return _taskRepository.GetTasks(terms);
         }
 
         [HttpPost]
