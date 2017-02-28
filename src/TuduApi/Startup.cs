@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using TuduApi.Data;
 
@@ -38,7 +39,10 @@ namespace TuduApi
             services.AddMvc()
                     .AddJsonOptions(
                         options
-                            => options.SerializerSettings.Converters.Add(new StringEnumConverter(true)));
+                            => options.SerializerSettings.Converters.Add(new StringEnumConverter(true)))
+                    .AddJsonOptions(
+                        options
+                            => options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore);
 
             //todo: change from singleton when no longer using mock
             services.AddSingleton<ITaskRepository, MockTaskRepository>();

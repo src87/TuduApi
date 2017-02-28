@@ -15,7 +15,13 @@ namespace TuduApi.Data
 
         private static IEnumerable<Task> InitialTasks()
         {
-            yield return new Task { Id = 1, Title = "First test task", Description = "first description", Status = TaskStatus.Active };
+            yield return new Task { Id = 1, Title = "First test task", Description = "first description", Status = TaskStatus.Active,
+                SubTasks = new List<Task>
+                {
+                    new Task { Id = 5, Title = "First subtask", Description = "sub task 1", Status = TaskStatus.Active },
+                    new Task { Id = 6, Title = "Second test task", Description = "sub task 2", Status = TaskStatus.Active },
+                }
+            };
             yield return new Task { Id = 2, Title = "Second test task", Description = "second description", Status = TaskStatus.Active };
             yield return new Task { Id = 3, Title = "Third test task", Description = "third description", Status = TaskStatus.Done };
             yield return new Task { Id = 4, Title = "Fourth test task", Description = "fourth description", Status = TaskStatus.Archived };
